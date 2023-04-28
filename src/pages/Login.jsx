@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import SocialBtn from '../components/SocialButtons';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -37,10 +38,11 @@ const Login = () => {
                   <Button
                     style={{ textDecoration: 'none' }}
                     variant="link"
-                    size="lg"
                     className="m-3 mb-0"
+                    as="a"
+                    href="/signup"
                   >
-                    <small> Create account </small>
+                    Create account
                   </Button>
                 </Col>
                 <Col className="d-grid" style={{ marginLeft: '15px' }}>

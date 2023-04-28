@@ -1,23 +1,33 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import { FaReact } from 'react-icons/fa';
 
 const Layout = () => {
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">Signup</Link>
-          </li>
-        </ul>
-      </nav>
-      <Outlet />
+      <Navbar bg="light" variant="light" expand="md">
+        <Navbar.Brand>
+          <FaReact style={{ margin: '5px' }} />
+          <Link style={{ textDecoration: 'none' }} to="/">
+            React Login
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link as={Link} to="/login">
+              Login
+            </Nav.Link>
+            <Nav.Link as={Link} to="/signup">
+              Signup
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <main className="container">
+        <Outlet />
+      </main>
     </>
   );
 };

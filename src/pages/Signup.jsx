@@ -49,10 +49,11 @@ const Signup = () => {
                   <Button
                     style={{ textDecoration: 'none' }}
                     variant="link"
-                    size="lg"
+                    as="a"
+                    href="/login"
                     className="m-3 mb-0"
                   >
-                    <small> Sign in instead </small>
+                    Sign in instead
                   </Button>
                 </Col>
                 <Col className="d-grid" style={{ marginLeft: '15px' }}>
