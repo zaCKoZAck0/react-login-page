@@ -6,7 +6,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import SocialBtn from '../components/SocialButtons';
+import calculatePasswordStrength from '../libs/passwordStrength';
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -22,40 +24,52 @@ const Signup = () => {
 
   const [validated, setValidated] = useState(false);
 
-  function validate() {
-    if (!input.email) {
+  function validate(validate = 'all') {
+    if ((validate === 'all' || validate === 'email') && !input.email) {
       setInputError((prevState) => ({
         ...prevState,
         email: 'Required.',
       }));
     }
-    if (!input.username) {
+    if ((validate === 'all' || validate === 'username') && !input.username) {
       setInputError((prevState) => ({
         ...prevState,
         username: 'Required.',
       }));
     }
-    if (!input.password) {
+    if ((validate === 'all' || validate === 'password') && !input.password) {
       setInputError((prevState) => ({
         ...prevState,
         password: 'Required.',
       }));
     }
 
-    if (input.password && input.password.length < 5)
+    if (
+      (validate === 'all' || validate === 'password') &&
+      input.password &&
+      input.password.length < 5
+    )
       setInputError((prevState) => ({
         ...prevState,
         password: 'Password too short.',
       }));
 
-    if (input.username && input.username.length < 3)
+    if (
+      (validate === 'all' || validate === 'username') &&
+      input.username &&
+      input.username.length < 3
+    )
       setInputError((prevState) => ({
         ...prevState,
         username: 'Username too short.',
       }));
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (input.email && !emailRegex.test(input.email))
+    if (
+      (validate === 'all' || validate === 'email') &&
+      input.email &&
+      !emailRegex.test(input.email)
+    )
       setInputError((prevState) => ({
         ...prevState,
         email: 'Invalid email format.',
@@ -78,13 +92,13 @@ const Signup = () => {
     e.preventDefault();
     e.stopPropagation();
     validate();
-    setValidated(true);
+    //server side validation
   }
 
   return (
     <Container>
       <h1 className="text-center text-primary">Create Account</h1>
-      <Form noValidate validated={validated}>
+      <Form noValidate>
         <Row className="justify-content-center">
           <Col xl={6}>
             <Card className="text-primary">
@@ -99,7 +113,7 @@ const Signup = () => {
                   onChange={handleChange}
                   type="text"
                   placeholder="Username"
-                  isValid={input.username && !inputError.username}
+                  onBlur={() => validate('username')}
                   isInvalid={inputError.username}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -117,8 +131,9 @@ const Signup = () => {
                   onChange={handleChange}
                   type="text"
                   placeholder="name@example.com"
-                  isValid={input.email && !inputError.email}
-                  isInvalid={inputError.email}
+                  onBlur={() => validate('email')}
+                  // isValid={input.email && !inputError.email}
+                  isInvalid={!!inputError.email}
                 />
                 <Form.Control.Feedback type="invalid">
                   {inputError.email}
@@ -135,9 +150,21 @@ const Signup = () => {
                   onChange={handleChange}
                   type="password"
                   placeholder="Password"
-                  isValid={input.password && !inputError.password}
+                  // isValid={input.password && !inputError.password}
+                  onBlur={() => validate('password')}
                   isInvalid={inputError.password}
                 />
+                {input.password && !inputError.password && (
+                  <div>
+                    <div>Password Strength:</div>
+                    <ProgressBar
+                      now={calculatePasswordStrength(input.password).score}
+                      label={calculatePasswordStrength(input.password).strength}
+                      variant={calculatePasswordStrength(input.password).color}
+                      animated={true}
+                    />
+                  </div>
+                )}
                 <Form.Control.Feedback type="invalid">
                   {inputError.password}
                 </Form.Control.Feedback>
