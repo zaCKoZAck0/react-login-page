@@ -22,6 +22,7 @@ const Signup = () => {
     password: '',
   });
 
+  //trigger to send data for server side validation
   const [validated, setValidated] = useState(false);
 
   function validate(validate = 'all') {
@@ -74,6 +75,10 @@ const Signup = () => {
         ...prevState,
         email: 'Invalid email format.',
       }));
+
+    setValidated(
+      !(inputError.email || inputError.password || inputError.username)
+    );
   }
 
   function handleChange(e) {

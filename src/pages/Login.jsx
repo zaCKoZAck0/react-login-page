@@ -18,6 +18,7 @@ const Login = () => {
     password: '',
   });
 
+  //trigger to send data for server side validation
   const [validated, setValidated] = useState(false);
 
   function validate(validate = 'all') {
@@ -65,6 +66,10 @@ const Login = () => {
       ...prevState,
       [name]: e.target.value,
     }));
+
+    setValidated(
+      !(inputError.email || inputError.password || inputError.username)
+    );
   }
 
   function handleSubmit(e) {
