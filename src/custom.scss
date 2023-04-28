@@ -1,1 +1,15 @@
-$primary: tomato;
+$primary: rgba(0, 173, 181, 0.8);
+$secondary: rgba(57, 62, 70, 0.8);
+$success: rgba(92, 184, 92, 0.8);
+$info: rgba(23, 162, 184, 0.8);
+$warning: rgba(255, 174, 66, 0.8);
+$danger: rgba(255, 82, 82, 0.8);
+$light: rgba(226, 226, 226, 0.8);
+$dark: rgba(34, 40, 49, 0.8);
+$background: rgba(255, 255, 255, 0.1);
+$border-radius: 10px;
+$box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+* {
+  font-family: 'Courier New', monospace;
+}

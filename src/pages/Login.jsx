@@ -8,27 +8,21 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import SocialBtn from '../components/SocialButtons';
 
-const Signup = () => {
+const Login = () => {
   return (
     <Container>
-      <h1 className="text-center text-primary">Create Account</h1>
+      <h1 className="text-center text-primary">Sign In</h1>
       <Row className="justify-content-center">
         <Col xl={6}>
           <Card className="text-primary">
             <FloatingLabel
               controlId="username"
-              label="Username"
+              label="Username or Email"
               className="m-3 mb-0"
             >
               <Form.Control type="text" placeholder="Username" />
             </FloatingLabel>
-            <FloatingLabel
-              controlId="email"
-              label="Email address"
-              className="m-3 mb-0"
-            >
-              <Form.Control type="text" placeholder="name@example.com" />
-            </FloatingLabel>
+
             <FloatingLabel
               controlId="password"
               label="Password"
@@ -36,13 +30,7 @@ const Signup = () => {
             >
               <Form.Control type="password" placeholder="Password" />
             </FloatingLabel>
-            <FloatingLabel
-              controlId="password2"
-              label="Re-enter Password"
-              className="m-3 mb-0"
-            >
-              <Form.Control type="password" placeholder="Password" />
-            </FloatingLabel>
+
             <div className="d-grid gap-2">
               <Row className="mb-3">
                 <Col className="d-grid" style={{ marginLeft: '15px' }}>
@@ -52,7 +40,7 @@ const Signup = () => {
                     size="lg"
                     className="m-3 mb-0"
                   >
-                    <small> Sign in instead </small>
+                    <small> Create account </small>
                   </Button>
                 </Col>
                 <Col className="d-grid" style={{ marginLeft: '15px' }}>
@@ -85,4 +73,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
